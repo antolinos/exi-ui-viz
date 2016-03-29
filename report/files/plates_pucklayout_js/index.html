@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - plates/pucklayout.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>plates/pucklayout.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">61.88</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">324</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">70.67</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">3.61</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">function PuckLayout(args) {
+	this.id = BUI.id();
+	this.height = 100;
+	this.width = this.height;
+	this.tbar = true;
+	
+	if (args != null) {
+		if (args.height != null) {
+			this.height = args.height;
+			this.width = args.height;
+		}
+		if (args.width != null) {
+			this.width = args.width;
+			this.height = args.width;
+		}
+		if (args.tbar != null) {
+			this.tbar = args.tbar;
+		}
+		
+	}
+}
+
+PuckLayout.prototype.renderAsSpine = function(puck) {
+	/** Rendering layout **/
+	document.getElementById(this.id).innerHTML = &quot;&quot;;
+	document.getElementById(this.id).setAttribute(&quot;width&quot;, this.width);
+	document.getElementById(this.id).setAttribute(&quot;height&quot;, this.height);
+	
+	var canvas = SVG.createSVGCanvas(document.getElementById(this.id), [[&quot;width&quot;, this.width], [&quot;height&quot;, this.height]])
+	var steps = 10;
+	var centerX = this.width/2;
+	var centerY = this.width/2;
+	var radius = (this.width/2) - this.width/8;
+	
+	
+	this.renderContainer(canvas, centerX, centerY, centerX - 4);
+	
+	var xValues = [];
+	var yValues = [];
+	
+	for (var i = 0; i &lt; steps; i++) {
+	    xValues[i] = (centerX + radius * Math.cos(2 * Math.PI * i / steps));
+	    yValues[i] = (centerY + radius * Math.sin(2 * Math.PI * i / steps));
+	    this.renderEmptyWell(canvas, xValues[i], yValues[i], (i+1));
+		
+	}
+	
+	for (var j = 0; j &lt; puck.sampleVOs.length; j++) {
+		var index = Number(puck.sampleVOs[j].location)-1;
+		
+		this.renderWell(canvas, xValues[index], yValues[index], (puck.sampleVOs[j].location));
+	}
+};
+
+
+PuckLayout.prototype.renderEmptyPlateWell = function(canvas, x, y, label) {
+	var s = Snap(canvas);
+	
+	var width = (this.width-40)/12;
+	var emptyWell = s.rect(x,y, width, width);
+	emptyWell.attr({
+	    fill: &quot;#FFFFFF&quot;,
+	    stroke: &quot;#000&quot;,
+	    strokeWidth: 1
+	});
+	
+};
+
+
+PuckLayout.prototype.renderEmptyWell = function(canvas, x, y, label) {
+	var s = Snap(canvas);
+	var radius = this.width/12;
+	var emptyWell = s.circle(x, y, radius);
+	emptyWell.attr({
+	    fill: &quot;#FFFFFF&quot;,
+	    stroke: &quot;#000&quot;,
+	    strokeWidth: 1
+	});
+	
+	s.text(x - (radius/2), y + (radius/2), label);
+	
+};
+
+PuckLayout.prototype.renderPlateContainer = function(canvas, width, height) {
+	var _this = this;
+	var s = Snap(canvas);
+	var bigCircle = s.rect(0,0, width, height);
+	bigCircle.attr({
+	    fill: &quot;#585858&quot;,
+	    stroke: &quot;#000&quot;,
+	    strokeWidth: 1
+	});
+	
+	function selectSVG(){
+		//bigCircle.animate({cy: 300}, 5000,mina.bounce);
+		//bigCircle.animate({fill:&quot;red&quot;},200);
+		bigCircle.attr({
+		    fill: &quot;#D8D8D8&quot;,
+		    stroke: &quot;#000&quot;,
+		    strokeWidth: 1
+		});
+	};
+	
+	function deselectSVG(){
+		bigCircle.attr({
+		    fill: &quot;#585858&quot;,
+		    stroke: &quot;#000&quot;,
+		    strokeWidth: 1,
+		    cursor: &#039;pointer&#039;
+		});
+	};
+	
+	function clickSVG(){
+		location.hash = &#039;#/mx/puck/&#039; + _this.puck.containerId + &#039;/main&#039;; 
+	};
+	
+	bigCircle.mouseover( selectSVG );
+	bigCircle.mouseout( deselectSVG );
+	bigCircle.click( clickSVG );
+	
+};
+
+
+PuckLayout.prototype.renderContainer = function(canvas, centerX, centerY, radius) {
+	var _this = this;
+	var s = Snap(canvas);
+	var bigCircle = s.circle(centerX, centerY, centerX - 4);
+	bigCircle.attr({
+	    fill: &quot;#585858&quot;,
+	    stroke: &quot;#000&quot;,
+	    strokeWidth: 1
+	});
+	
+	function selectSVG(){
+		//bigCircle.animate({cy: 300}, 5000,mina.bounce);
+		//bigCircle.animate({fill:&quot;red&quot;},200);
+		bigCircle.attr({
+		    fill: &quot;#D8D8D8&quot;,
+		    stroke: &quot;#000&quot;,
+		    strokeWidth: 1
+		});
+	};
+	
+	function deselectSVG(){
+		bigCircle.attr({
+		    fill: &quot;#585858&quot;,
+		    stroke: &quot;#000&quot;,
+		    strokeWidth: 1,
+		    cursor: &#039;pointer&#039;
+		});
+	};
+	
+	function clickSVG(){
+		location.hash = &#039;#/mx/puck/&#039; + _this.puck.containerId + &#039;/main&#039;; 
+	};
+	
+	bigCircle.mouseover( selectSVG );
+	bigCircle.mouseout( deselectSVG );
+	bigCircle.click( clickSVG );
+	
+};
+
+
+
+PuckLayout.prototype.renderPlateWell = function(canvas, x, y, label) {
+	var s = Snap(canvas);
+	var width = (this.width-40)/12;
+	var emptyWell = s.rect(x,y, width, width);
+	emptyWell.attr({
+	    fill: &quot;#FA5882&quot;,
+	    stroke: &quot;#000&quot;,
+	    strokeWidth: 1
+	});
+};
+
+
+
+PuckLayout.prototype.renderWell = function(canvas, x, y, label) {
+	var s = Snap(canvas);
+	var radius = this.width/12;
+	var well = s.circle(x, y, radius);
+	well.attr({
+	    fill: &quot;#FA5882&quot;,
+	    stroke: &quot;#000&quot;,
+	    strokeWidth: 1
+	});
+	s.text(x - (radius/2), y + (radius/2), label);
+};
+
+
+PuckLayout.prototype.renderAsPlate = function(puck) {
+	/** Rendering layout **/
+	document.getElementById(this.id).innerHTML = &quot;&quot;;
+	document.getElementById(this.id).setAttribute(&quot;width&quot;, this.width);
+	document.getElementById(this.id).setAttribute(&quot;height&quot;, this.height);
+
+	var canvas = SVG.createSVGCanvas(document.getElementById(this.id), [[&quot;width&quot;, this.width], [&quot;height&quot;, this.height]]);
+	var s = Snap(canvas);
+	
+	
+	this.renderPlateContainer(canvas, this.width, this.height);
+	
+	
+	/** Getting coordinates X and Y **/
+	var xValues = [];
+	
+	var height = this.height/12 ;
+	var width = this.width/8 ;
+	/** External circle with 10 positions **/
+	for (var j = 0; j &lt; 8;j++) {
+	    for (var i = 0;i &lt; 12; i++) {
+	    	xValues.push( [2 + i*height, 2 +j*width ]);
+	    }
+	}
+	
+	for (var i = 0; i &lt; xValues.length; i++) {
+		this.renderEmptyPlateWell(canvas, xValues[i][0], xValues[i][1], (i+1));
+	}
+	
+	
+	for (var j = 0; j &lt; puck.sampleVOs.length; j++) {
+		var index = Number(puck.sampleVOs[j].location)-1;
+		this.renderPlateWell(canvas, xValues[index][0], xValues[index][1], (puck.sampleVOs[j].location));
+	}
+	
+};
+
+PuckLayout.prototype.renderAsUnipuck = function(puck) {
+	/** Rendering layout **/
+	document.getElementById(this.id).innerHTML = &quot;&quot;;
+	document.getElementById(this.id).setAttribute(&quot;width&quot;, this.width);
+	document.getElementById(this.id).setAttribute(&quot;height&quot;, this.height);
+
+	var canvas = SVG.createSVGCanvas(document.getElementById(this.id), [[&quot;width&quot;, this.width], [&quot;height&quot;, this.height]]);
+	var s = Snap(canvas);
+	
+	var centerX = (this.width/2) - 2;
+	var centerY = (this.width/2) - 2;
+	var radius = ((this.width/2) - this.width/8) - 5;
+	
+	
+	this.renderContainer(canvas, centerX, centerY, centerX - 4);
+	
+	
+	/** Getting coordinates X and Y **/
+	var xValues = [];
+	var yValues = [];
+	
+	/** External circle with 10 positions **/
+	for (var i = 0; i &lt; 11; i++) {
+		steps = 10;
+	    xValues[i] = (centerX + radius * Math.cos(2 * Math.PI * i / steps));
+	    yValues[i] = (centerY + radius * Math.sin(2 * Math.PI * i / steps));
+		
+	}
+	
+	/** Internal circle with 6 positions **/
+	for (var i = 10; i &lt; 16; i++) {
+		steps = 6;
+		radius =  (this.width/2) - this.width/3;
+	    xValues[i] = (centerX + radius * Math.cos(2 * Math.PI * i / steps));
+	    yValues[i] = (centerY + radius * Math.sin(2 * Math.PI * i / steps));
+	}
+
+	/** Drawing wells **/
+	for (var i = 0; i &lt; 16; i++) {
+		this.renderEmptyWell(canvas, xValues[i], yValues[i], (i+1));
+	}
+	
+	for (var j = 0; j &lt; puck.sampleVOs.length; j++) {
+		var index = Number(puck.sampleVOs[j].location)-1;
+		this.renderWell(canvas, xValues[index], yValues[index], (puck.sampleVOs[j].location));
+	}
+	
+};
+
+PuckLayout.prototype.load = function(puck) {
+	this.puck = puck;
+	try{
+		/** It may happen that the DIV container has not been rendered yet **/
+		this.render(puck);
+	}
+	catch(e){
+		console.log(e);
+	}
+	
+};
+PuckLayout.prototype.render = function(puck) {
+	if (this.puck != null){
+		/** Unipuck **/
+		if (this.puck.capacity == 16){
+			this.renderAsUnipuck(this.puck);
+		}
+		
+		/** Spine **/
+		if (this.puck.capacity == 10){
+			this.renderAsSpine(this.puck);
+		}
+		
+		/** Spine **/
+		if (this.puck.capacity == 96){
+			this.renderAsPlate(this.puck);
+		}
+	}
+};
+
+PuckLayout.prototype.getPanel = function() {
+	var _this = this;
+	this.panel = Ext.create(&#039;Ext.panel.Panel&#039;, {
+		margin : 10,
+		items : [ 
+		         {
+						html : &#039;&lt;div style=&quot;width:&#039; + (this.width + 2) +&#039;px;height:&#039; + (this.height +2) +&#039;px;&quot; id=&#039; + this.id +&#039;&gt;&lt;/div&gt;&#039;
+				 }
+		],		
+		listeners : {
+			afterrender : function(component, eOpts) {
+				_this.render();
+			}
+	    }
+	});
+	
+	return this.panel;
+};</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

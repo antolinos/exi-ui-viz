@@ -1,0 +1,369 @@
+{
+    "project": {
+        "name": "EXI",
+        "description": "Extended ISPyB",
+        "version": "1.0.0",
+        "url": "https://github.com/ispyb/EXI"
+    },
+    "files": {
+        "js/plates/containers/spinelayout.js": {
+            "name": "js/plates/containers/spinelayout.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/plates/containers/unipucklayout.js": {
+            "name": "js/plates/containers/unipucklayout.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/plates/pucklayout.js": {
+            "name": "js/plates/pucklayout.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/plates/spine.js": {
+            "name": "js/plates/spine.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {},
+    "elements": {},
+    "classitems": [
+        {
+            "file": "js/plates/containers/spinelayout.js",
+            "line": 19,
+            "class": ""
+        },
+        {
+            "file": "js/plates/containers/spinelayout.js",
+            "line": 54,
+            "class": ""
+        },
+        {
+            "file": "js/plates/containers/unipucklayout.js",
+            "line": 61,
+            "class": ""
+        },
+        {
+            "file": "js/plates/containers/unipucklayout.js",
+            "line": 77,
+            "class": ""
+        },
+        {
+            "file": "js/plates/containers/unipucklayout.js",
+            "line": 81,
+            "class": ""
+        },
+        {
+            "file": "js/plates/containers/unipucklayout.js",
+            "line": 89,
+            "class": ""
+        },
+        {
+            "file": "js/plates/containers/unipucklayout.js",
+            "line": 99,
+            "class": ""
+        },
+        {
+            "file": "js/plates/containers/unipucklayout.js",
+            "line": 102,
+            "class": ""
+        },
+        {
+            "file": "js/plates/containers/unipucklayout.js",
+            "line": 164,
+            "class": ""
+        },
+        {
+            "file": "js/plates/pucklayout.js",
+            "line": 24,
+            "class": ""
+        },
+        {
+            "file": "js/plates/pucklayout.js",
+            "line": 192,
+            "class": ""
+        },
+        {
+            "file": "js/plates/pucklayout.js",
+            "line": 204,
+            "class": ""
+        },
+        {
+            "file": "js/plates/pucklayout.js",
+            "line": 209,
+            "class": ""
+        },
+        {
+            "file": "js/plates/pucklayout.js",
+            "line": 229,
+            "class": ""
+        },
+        {
+            "file": "js/plates/pucklayout.js",
+            "line": 245,
+            "class": ""
+        },
+        {
+            "file": "js/plates/pucklayout.js",
+            "line": 249,
+            "class": ""
+        },
+        {
+            "file": "js/plates/pucklayout.js",
+            "line": 257,
+            "class": ""
+        },
+        {
+            "file": "js/plates/pucklayout.js",
+            "line": 265,
+            "class": ""
+        },
+        {
+            "file": "js/plates/pucklayout.js",
+            "line": 280,
+            "class": ""
+        },
+        {
+            "file": "js/plates/pucklayout.js",
+            "line": 290,
+            "class": ""
+        },
+        {
+            "file": "js/plates/pucklayout.js",
+            "line": 295,
+            "class": ""
+        },
+        {
+            "file": "js/plates/pucklayout.js",
+            "line": 300,
+            "class": ""
+        },
+        {
+            "file": "js/plates/spine.js",
+            "line": 24,
+            "class": ""
+        },
+        {
+            "file": "js/plates/spine.js",
+            "line": 123,
+            "class": ""
+        },
+        {
+            "file": "js/plates/spine.js",
+            "line": 192,
+            "class": ""
+        },
+        {
+            "file": "js/plates/spine.js",
+            "line": 204,
+            "class": ""
+        },
+        {
+            "file": "js/plates/spine.js",
+            "line": 209,
+            "class": ""
+        },
+        {
+            "file": "js/plates/spine.js",
+            "line": 229,
+            "class": ""
+        },
+        {
+            "file": "js/plates/spine.js",
+            "line": 245,
+            "class": ""
+        },
+        {
+            "file": "js/plates/spine.js",
+            "line": 249,
+            "class": ""
+        },
+        {
+            "file": "js/plates/spine.js",
+            "line": 257,
+            "class": ""
+        },
+        {
+            "file": "js/plates/spine.js",
+            "line": 265,
+            "class": ""
+        },
+        {
+            "file": "js/plates/spine.js",
+            "line": 280,
+            "class": ""
+        },
+        {
+            "file": "js/plates/spine.js",
+            "line": 290,
+            "class": ""
+        },
+        {
+            "file": "js/plates/spine.js",
+            "line": 296,
+            "class": ""
+        },
+        {
+            "file": "js/plates/spine.js",
+            "line": 301,
+            "class": ""
+        }
+    ],
+    "warnings": [
+        {
+            "message": "Missing item type",
+            "line": " js/plates/containers/spinelayout.js:19"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/containers/spinelayout.js:54"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/containers/unipucklayout.js:61"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/containers/unipucklayout.js:77"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/containers/unipucklayout.js:81"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/containers/unipucklayout.js:89"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/containers/unipucklayout.js:99"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/containers/unipucklayout.js:102"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/containers/unipucklayout.js:164"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/pucklayout.js:24"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/pucklayout.js:192"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/pucklayout.js:204"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/pucklayout.js:209"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/pucklayout.js:229"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/pucklayout.js:245"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/pucklayout.js:249"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/pucklayout.js:257"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/pucklayout.js:265"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/pucklayout.js:280"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/pucklayout.js:290"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/pucklayout.js:295"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/pucklayout.js:300"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/spine.js:24"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/spine.js:123"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/spine.js:192"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/spine.js:204"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/spine.js:209"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/spine.js:229"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/spine.js:245"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/spine.js:249"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/spine.js:257"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/spine.js:265"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/spine.js:280"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/spine.js:290"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/spine.js:296"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/plates/spine.js:301"
+        }
+    ]
+}
