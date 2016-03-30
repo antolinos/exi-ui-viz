@@ -54,14 +54,14 @@ UnipuckLayout.prototype.getConfiguration = function() {
 	for(var i = 0; i < 20; i ++) {
 		if (i%4 == 3){
 			coordinates.push({
-					cx		: centerX + radius * Math.cos(2 * Math.PI * i / 20),
-					cy 		: centerY + radius * Math.sin(2 * Math.PI * i / 20),
+					cx			: centerX + radius * Math.cos(2 * Math.PI * i / 20),
+					cy 			: centerY + radius * Math.sin(2 * Math.PI * i / 20),
 					label   	: labels[xLabel],
-					r  		: this.width/11,
+					r  			: this.width/11,
 					fill		: this.fill,
 					fontColor 	: this.fontColor,
 					fontSize	: this.fontSize,
-					id		: this.id + "_" + labels[xLabel]
+					id			: this.id + "_" + labels[xLabel]
 			});  
 			xLabel = xLabel + 1;
 		}
@@ -70,10 +70,11 @@ UnipuckLayout.prototype.getConfiguration = function() {
 	return {
 			width 	: this.width,
 			height	: this.height,
-			r 	: this.width/2,
-			cx 	: this.width/2,
-			cy 	: this.height/2,
-			wells : coordinates
+			r 		: this.width/2,
+			cx 		: this.width/2,
+			cy 		: this.height/2,
+			id		: this.id,
+			wells 	: coordinates
 	}
 };
 

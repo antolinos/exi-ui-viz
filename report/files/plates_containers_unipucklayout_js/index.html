@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">57.27</p>
+      <p class="stat">55.66</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">357</p>
+      <p class="stat">97</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">51.02</p>
+      <p class="stat">39.87</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">4.61</p>
+      <p class="stat">1.19</p>
     </div>
   </div>
 </div>
@@ -93,358 +93,98 @@
 	this.id = _.uniqueId(&quot;unipuck_layout_&quot;);
 	this.height = 200;
 	this.width = this.height;
+	this.fontSize = 7;
+	this.fontColor = &#039;gray&#039;;
+
+	this.fill = &#039;gray&#039;;
 
 	if (args != null) {
 		if (args.size != null) {
 			this.height = args.size;
 			this.width = args.size;
 		}
+		if (args.fontSize != null) {
+			this.fontSize = args.fontSize;
+		}
+		if (args.fontColor != null) {
+			this.fontColor = args.fontColor;
+		}
+		if (args.fill != null) {
+			this.fill = args.fill;
+		}
 	}
 }
 
 UnipuckLayout.prototype.getConfiguration = function() {
-return [
-		{&quot;cx&quot;:168,&quot;cy&quot;:98,&quot;r&quot;:1,&quot;color&quot;:&quot;blue&quot;,&quot;label&quot;:0},
-		{&quot;cx&quot;:156.8877472981827,&quot;cy&quot;:135.84485722189183,&quot;r&quot;:1,&quot;color&quot;:&quot;blue&quot;,&quot;label&quot;:1},
-		{&quot;cx&quot;:127.07905091013205,&quot;cy&quot;:161.67423967481628,&quot;r&quot;:1,&quot;color&quot;:&quot;blue&quot;,&quot;label&quot;:2},
-		{&quot;cx&quot;:88.03796132087005,&quot;cy&quot;:167.2875009316653,&quot;r&quot;:1,&quot;color&quot;:&quot;blue&quot;,&quot;label&quot;:3},
-		{&quot;cx&quot;:52.15974862383005,&quot;cy&quot;:150.90247020479808,&quot;r&quot;:1,&quot;color&quot;:&quot;blue&quot;,&quot;label&quot;:4},
-		{&quot;cx&quot;:30.835491846985178,&quot;cy&quot;:117.72127897890007,&quot;r&quot;:1,&quot;color&quot;:&quot;blue&quot;,&quot;label&quot;:5},
-		{&quot;cx&quot;:30.835491846985178,&quot;cy&quot;:78.27872102109994,&quot;r&quot;:1,&quot;color&quot;:&quot;blue&quot;,&quot;label&quot;:6},
-		{&quot;cx&quot;:52.15974862383003,&quot;cy&quot;:45.09752979520193,&quot;r&quot;:1,&quot;color&quot;:&quot;blue&quot;,&quot;label&quot;:7},
-		{&quot;cx&quot;:88.03796132087004,&quot;cy&quot;:28.712499068334708,&quot;r&quot;:1,&quot;color&quot;:&quot;blue&quot;,&quot;label&quot;:8},
-		{&quot;cx&quot;:127.07905091013203,&quot;cy&quot;:34.3257603251837,&quot;r&quot;:1,&quot;color&quot;:&quot;blue&quot;,&quot;label&quot;:9},
-		{&quot;cx&quot;:156.8877472981827,&quot;cy&quot;:60.15514277810818,&quot;r&quot;:1,&quot;color&quot;:&quot;blue&quot;,&quot;label&quot;:10},
-		{&quot;cx&quot;:168,&quot;cy&quot;:97.99999999999991,&quot;r&quot;:1,&quot;color&quot;:&quot;blue&quot;,&quot;label&quot;:11},
-		{&quot;cx&quot;:108.30056647916498,&quot;cy&quot;:129.7018838765051,&quot;r&quot;:1,&quot;color&quot;:&quot;blue&quot;,&quot;label&quot;:11},
-		{&quot;cx&quot;:71.03276685416843,&quot;cy&quot;:117.59284174308245,&quot;r&quot;:1,&quot;color&quot;:&quot;blue&quot;,&quot;label&quot;:12},
-		{&quot;cx&quot;:71.03276685416841,&quot;cy&quot;:78.40715825691758,&quot;r&quot;:1,&quot;color&quot;:&quot;blue&quot;,&quot;label&quot;:13},
-		{&quot;cx&quot;:108.30056647916489,&quot;cy&quot;:66.29811612349488,&quot;r&quot;:1,&quot;color&quot;:&quot;blue&quot;,&quot;label&quot;:14},
-		{&quot;cx&quot;:131.33333333333331,&quot;cy&quot;:97.99999999999997,&quot;r&quot;:1,&quot;color&quot;:&quot;blue&quot;,&quot;label&quot;:15}
-	];
+	var coordinates = [];
+	var centerX = (this.width/2) - 2;
+	var centerY = (this.width/2) - 2;
+	var radius = ((this.width/2) - this.width/8);
+	var xLabel = 0;
+	var labels = [14,13,12,11,10,9,8,7,6,16, 15];
+	for(var i = 0; i &lt; 55; i ++) {
+		if (i%5 == 1){
+			coordinates.push({
+					cx		: centerX + radius * Math.cos(2 * Math.PI * i / 55),
+					cy 		: centerY + radius * Math.sin(2 * Math.PI * i / 55),
+					label   	: labels[xLabel],
+					r  		: this.width/11,
+					fill		: this.fill,
+					fontColor 	: this.fontColor,
+					fontSize	: this.fontSize,
+					id		: this.id + &quot;_&quot; + labels[xLabel]
+			});  
+			xLabel = xLabel + 1;
+		}
+
+	}
+	radius =  (this.width/2) - this.width/3;
+	
+	xLabel = 0;
+	labels = [4,3,2,1,5];	
+	for(var i = 0; i &lt; 20; i ++) {
+		if (i%4 == 3){
+			coordinates.push({
+					cx		: centerX + radius * Math.cos(2 * Math.PI * i / 20),
+					cy 		: centerY + radius * Math.sin(2 * Math.PI * i / 20),
+					label   	: labels[xLabel],
+					r  		: this.width/11,
+					fill		: this.fill,
+					fontColor 	: this.fontColor,
+					fontSize	: this.fontSize,
+					id		: this.id + &quot;_&quot; + labels[xLabel]
+			});  
+			xLabel = xLabel + 1;
+		}
+	}
+
+	return {
+			width 	: this.width,
+			height	: this.height,
+			r 	: this.width/2,
+			cx 	: this.width/2,
+			cy 	: this.height/2,
+			wells : coordinates
+	}
 };
 
-UnipuckLayout.prototype.renderContainer = function(canvas, centerX, centerY, radius) {
-	var _this = this;
-	var s = Snap(canvas);
-	var bigCircle = s.circle(centerX, centerY, centerX - 4);
-	bigCircle.attr({
-	    fill: &quot;#585858&quot;,
-	    stroke: &quot;#000&quot;,
-	    strokeWidth: 1
-	});
-	
-	function selectSVG(){
-		//bigCircle.animate({cy: 300}, 5000,mina.bounce);
-		//bigCircle.animate({fill:&quot;red&quot;},200);
-		bigCircle.attr({
-		    fill: &quot;#D8D8D8&quot;,
-		    stroke: &quot;#000&quot;,
-		    strokeWidth: 1
-		});
-	};
-	
-	function deselectSVG(){
-		bigCircle.attr({
-		    fill: &quot;#585858&quot;,
-		    stroke: &quot;#000&quot;,
-		    strokeWidth: 1,
-		    cursor: &#039;pointer&#039;
-		});
-	};
-	
-	function clickSVG(){
-		location.hash = &#039;#/mx/puck/&#039; + _this.puck.containerId + &#039;/main&#039;; 
-	};
-	
-	bigCircle.mouseover( selectSVG );
-	bigCircle.mouseout( deselectSVG );
-	bigCircle.click( clickSVG );
-	return bigCircle;
-};
-
-
-UnipuckLayout.prototype._setProperties = function(node, attributes)
-	{
-		if (attributes instanceof Array){
-				for (var i=0; i&lt; attributes.length; i++)
-				{
-					node.setAttribute(attributes[i][0], attributes[i][1]);
-				}
-		}
-		else{
-			for ( var key in attributes){
-				node.setAttribute(key, attributes[key]);
-			}
-		}
-	};
-
-UnipuckLayout.prototype.createSVGCanvas = function(parentNode, attributes)
-	{
-		
-		attributes.push( [&#039;xmlns&#039;, &#039;http://www.w3.org/2000/svg&#039;], [&#039;xmlns:xlink&#039;, &#039;http://www.w3.org/1999/xlink&#039;]);
-		var svg = document.createElementNS(&quot;http://www.w3.org/2000/svg&quot;, &quot;svg&quot;);
-		this._setProperties(svg, attributes);
-		parentNode.appendChild( svg);
-		return svg;
-		
-	};
-
-UnipuckLayout.prototype.render = function(targetId, puck) {
-	this.puck = puck;
-
-	dust.render(&quot;unipuck.platelayout&quot;, this.getConfiguration(), function(err, out){
-        	document.getElementById(targetId).innerHTML = (out);
-     	});
-	return;
-	/** Rendering layout **/
+UnipuckLayout.prototype.render = function(targetId) {
 	document.getElementById(targetId).innerHTML = &quot;&quot;;
 	document.getElementById(targetId).setAttribute(&quot;width&quot;, this.width);
 	document.getElementById(targetId).setAttribute(&quot;height&quot;, this.height);
+	
+	/** Filling template and rendering on the target container **/
+	var configuration = this.getConfiguration();
+	dust.render(&quot;unipuck.platelayout&quot;, configuration, function(err, out){
+        	document.getElementById(targetId).innerHTML = (out);
+     	});
 
-	var canvas = this.createSVGCanvas(document.getElementById(targetId), [[&quot;width&quot;, this.width], [&quot;height&quot;, this.height]]);
-	canvas.setAttribute(&quot;width&quot;, this.width);
-	canvas.setAttribute(&quot;height&quot;, this.height);
-	var s = Snap(canvas);
-	
-	var centerX = (this.width/2) - 2;
-	var centerY = (this.width/2) - 2;
-	var radius = ((this.width/2) - this.width/8) - 5;
-	
-	
-	var container = this.renderContainer(canvas, centerX, centerY, centerX - 4);
-	
-	var coordinates = [];
-	/** Getting coordinates X and Y **/
-	var xValues = [];
-	var yValues = [];
-	
-	/** External circle with 11 positions **/
-	for (var i = 0; i &lt; 12; i++) {
-	    steps = 11;
-	    xValues[i] = (centerX + radius * Math.cos(2 * Math.PI * i / steps));
-	    yValues[i] = (centerY + radius * Math.sin(2 * Math.PI * i / steps));
-
-		coordinates.push({
-					cx	: xValues[i],
-					cy 	: yValues[i],
-					r  	: 1,
-					color 	: &#039;blue&#039;,
-					label   : i
-
-		});
-		
-	}
-	
-	/** Internal circle with 6 positions **/
-	for (var i = 11; i &lt; 16; i++) {
-	    steps = 5;
-	    radius =  (this.width/2) - this.width/3;
-	    xValues[i] = (centerX + radius * Math.cos(2 * Math.PI * i / steps));
-	    yValues[i] = (centerY + radius * Math.sin(2 * Math.PI * i / steps));
-		coordinates.push({
-					cx	: xValues[i],
-					cy 	: yValues[i],
-					r  	: 1,
-					color 	: &#039;blue&#039;,
-					label   : i
-
-		});
+	/** Attach events **/
+	for (var i =0; i &lt; configuration.wells.length; i++){
+		document.getElementById(configuration.wells[i].id).onclick = function(event, obj){console.log(event);}
 	}
 
-	console.log(JSON.stringify(coordinates));
 	return;
-	this.plateSVG = s.group(container);
-
-	/** Location vs Index array in the view **/
-	this.transpose = [16, 15, 14, 13, 12, 1, 11, 10, 9, 8, 7, 6, 5,4, 3, 2];
-		
-	/** Drawing wells **/
-	for (var i = 0; i &lt; 16; i++) {
-		var index = this.transpose[i] - 1;
-		this.plateSVG.add(this.renderEmptyWell(canvas, xValues[index], yValues[index], i + 1));
-	}
-	
-	for (var j = 0; j &lt; puck.sampleVOs.length; j++) {
-		var index = this.transpose[Number(puck.sampleVOs[j].location)-1] - 1;
-		this.plateSVG.add(this.renderWell(canvas, xValues[index], yValues[index], (puck.sampleVOs[j].location)));
-	}
-
-	this.plateSVG.add(this.drawDecorators(canvas, centerX, centerY));
-	this.plateSVG.transform(&quot;r-90&quot;);
-
-};
-
-UnipuckLayout.prototype.drawDecorators = function(canvas, centerX, centerY, radius) {
-	var s = Snap(canvas);
-	var radius = this.width/12;
-	var center = s.circle(centerX, centerY, radius/2.5);
-	center.attr({
-	    fill: &quot;#FFFFFF&quot;,
-	    stroke: &quot;#FFF&quot;,
-	    strokeWidth: 1
-	});
-
-	var up = s.circle(centerX + radius/3, centerY + radius/3, radius/6);
-	up.attr({
-	    fill: &quot;#FFFFFF&quot;,
-	    stroke: &quot;#FFF&quot;,
-	    strokeWidth: 1
-	});
-
-	var down = s.circle(centerX + radius/3, centerY - radius/3, radius/6);
-	down.attr({
-	    fill: &quot;#FFFFFF&quot;,
-	    stroke: &quot;#FFF&quot;,
-	    strokeWidth: 1
-	});
-
-
-	var bottom = s.circle(centerX, centerY + this.width/2 - radius/2.5, radius/2.5);
-	bottom.attr({
-	    fill: &quot;#FFFFFF&quot;,
-	    stroke: &quot;#FFF&quot;,
-	    strokeWidth: 1
-	});
-
-	var middlebottom = s.circle(centerX, centerY + this.width/4, radius/2.5);
-	middlebottom.attr({
-	    fill: &quot;#FFFFFF&quot;,
-	    stroke: &quot;#000&quot;,
-	    strokeWidth: 1
-	});
-
-	return s.group(center, up, down);
-};
-
-
-UnipuckLayout.prototype.load = function(puck) {
-	this.puck = puck;
-	try{
-		/** It may happen that the DIV container has not been rendered yet **/
-		this.render(puck);
-	}
-	catch(e){
-		console.log(e);
-	}
-	
-};
-
-UnipuckLayout.prototype.getPanel = function() {
-	var _this = this;
-	this.panel = Ext.create(&#039;Ext.panel.Panel&#039;, {
-		margin : 10,
-		items : [ 
-		         {
-				html : &#039;&lt;div style=&quot;width:&#039; + (this.width + 2) +&#039;px;height:&#039; + (this.height +2) +&#039;px;&quot; id=&#039; + this.id +&#039;&gt;&lt;/div&gt;&#039;
-			 }
-		],		
-		listeners : {
-			afterrender : function(component, eOpts) {
-				_this.render();
-			}
-	    }
-	});
-	return this.panel;
-};
-
-
-
-
-UnipuckLayout.prototype._getTopButtons = function() {
-	var _this = this;
-	var actions = [];
-
-	actions.push(Ext.create(&#039;Ext.Action&#039;, {
-		icon : &#039;../images/icon/edit.png&#039;,
-		text : &#039;Edit&#039;,
-		disabled : false,
-		handler : function(widget, e) {
-			var containerId = _this.puck.containerId;
-			var puckForm = new PuckForm({
-				width : 910
-			});
-
-			puckForm.onSaved.attach(function(sender, puck){
-				_this.load(_this.shipment);
-				window.close();
-			});
-			var window = Ext.create(&#039;Ext.window.Window&#039;, {
-				    title: &#039;Edit Puck&#039;,
-				    height: 705,
-				    modal : true,
-				    resizable : true,
-				    layout: &#039;fit&#039;,
-				    items: puckForm.getPanel()
-				}).show();
-
-			puckForm.load(_this.puck);
-		}
-	}));
-	
-	
-
-	return actions;
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-UnipuckLayout.prototype.renderWell = function(canvas, x, y, label) {
-	var s = Snap(canvas);
-	var radius = this.width/12;
-	var well = s.circle(x, y, radius);
-	well.attr({
-	    fill: &quot;#FA5882&quot;,
-	    stroke: &quot;#000&quot;,
-	    strokeWidth: 1
-	});
-
-
-	var text = s.text(x - (radius/2) + 3, y + (radius/2) - 5, label);
-	text.transform(&quot;r90&quot;);
-	return s.group(well, text);
-};
-
-
-
-UnipuckLayout.prototype.renderEmptyPlateWell = function(canvas, x, y, label) {
-	var s = Snap(canvas);
-	
-	var width = (this.width-40)/12;
-	var emptyWell = s.rect(x,y, width, width);
-	emptyWell.attr({
-	    fill: &quot;#FFFFFF&quot;,
-	    stroke: &quot;#000&quot;,
-	    strokeWidth: 1
-	});
-	return s.group(emptyWell);
-};
-
-
-UnipuckLayout.prototype.renderEmptyWell = function(canvas, x, y, label) {
-	var s = Snap(canvas);
-	var radius = this.width/12;
-	var emptyWell = s.circle(x, y, radius);
-	emptyWell.attr({
-	    fill: &quot;#FFFFFF&quot;,
-	    stroke: &quot;#000&quot;,
-	    strokeWidth: 1
-	});
-	
-	var text = s.text(x - (radius/2) + 3, y + (radius/2) - 5, label);
-	text.transform(&quot;r90&quot;);
-	return s.group(emptyWell, text);
-	
 };</textarea>
   </div>
 </div>

@@ -18,7 +18,12 @@ Gallery.prototype.init = function(targetId){
 	puck.sampleVOs = [];
 	for(var i = 0; i<4; i++){
 		var id = this.addItem("","", "main");
-		new UnipuckLayout({size : i*40 + 60, fontSize: i+6, fill:"#F2F2F2"}).render(id, puck);
+		new UnipuckLayout({
+								size : i*40 + 60, 
+								fontSize: i+6, 
+								fill:"#2E2E2E",
+								fontColor : '#FFFFFF'
+							}).render(id, puck);
 	}
 
 };
