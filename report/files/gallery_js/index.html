@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">69.67</p>
+      <p class="stat">68.21</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">24</p>
+      <p class="stat">74</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">12.50</p>
+      <p class="stat">17.41</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">0.25</p>
+      <p class="stat">0.70</p>
     </div>
   </div>
 </div>
@@ -91,7 +91,7 @@
   <div class="row">
     <textarea id="file-source" class="col-md-12">function Gallery(args){
 
-};
+}
 
 Gallery.prototype.addItem = function(name, description, targetId){
 	var main = document.getElementById(targetId);
@@ -101,17 +101,67 @@ Gallery.prototype.addItem = function(name, description, targetId){
 	return container.getAttribute(&quot;id&quot;);
 	
 };
+
+Gallery.prototype.doUnipuck = function(targetId){
+	var id = this.addItem(&quot;&quot;,&quot;&quot;, &quot;main&quot;);
+	var unipuck = new UnipuckLayout({
+							width : 160,
+							height : 160,
+							fontSize: 10, 
+							fill:&quot;#2E2E2E&quot;,
+							fontColor : &#039;#FFFFFF&#039;
+						});
+	unipuck.render(id);
+	unipuck.load([{&#039;name&#039;:&#039;test&#039;, position:1, id:&#039;id&#039;},{&#039;name&#039;:&#039;test&#039;, position:8, id:&#039;id&#039;}]);
+	unipuck.onClick.attach(function(sender, args){
+		console.log(args);
+	});
+};
+
+Gallery.prototype.doSpine = function(targetId){
+	var id = this.addItem(&quot;&quot;,&quot;&quot;, &quot;main&quot;);
+	var spine = new SpineLayout({
+							width : 160,
+							height : 160,
+							fontSize: 10, 
+							fill:&quot;#2E2E2E&quot;,
+							fontColor : &#039;#FFFFFF&#039;
+						});
+	spine.render(id);
+	spine.load([{&#039;name&#039;:&#039;test&#039;, position:1, id:&#039;id&#039;},{&#039;name&#039;:&#039;test&#039;, position:8, id:&#039;id&#039;}]);
+	spine.onClick.attach(function(sender, args){
+		console.log(args);
+	});
+};
+
+Gallery.prototype.doSamplePlate = function(targetId){
+	var id = this.addItem(&quot;&quot;,&quot;&quot;, &quot;main&quot;);
+	var samplePlateLayout = new SamplePlateLayout({
+							width : 400,
+							height : 200,
+							fontSize: 10, 
+							fill:&quot;#2E2E2E&quot;,
+							fontColor : &#039;#FFFFFF&#039;
+						});
+	samplePlateLayout.render(id);
+	samplePlateLayout.load([{&#039;name&#039;:&#039;test&#039;, position:1, id:&#039;id&#039;},{&#039;name&#039;:&#039;test&#039;, position:8, id:&#039;id&#039;}]);
+	samplePlateLayout.onClick.attach(function(sender, args){
+		console.log(args);
+	});
+};
+
 Gallery.prototype.init = function(targetId){
 	var panel = document.getElementById(targetId);
-	panel.innerHTML = &quot;test&quot;;
 
-	var puck = {};
-	puck.sampleVOs = [];
-	for(var i = 0; i&lt;4; i++){
-		var id = this.addItem(&quot;&quot;,&quot;&quot;, &quot;main&quot;);
-		new UnipuckLayout({size : i*40 + 60, fontSize: i+6, fill:&quot;#F2F2F2&quot;}).render(id, puck);
-	}
+	this.doUnipuck();
+	this.doSpine();
+	this.doSamplePlate();
+	
+	
+		
 
+	
+	
 };</textarea>
   </div>
 </div>

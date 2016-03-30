@@ -1,328 +1,165 @@
+/**
+* Super class for sample layouts: unipuck, spines,etc..
+*
+* @class PuckLayout
+* @constructor
+*/
 function PuckLayout(args) {
-	this.id = BUI.id();
-	this.height = 100;
-	this.width = this.height;
-	this.tbar = true;
+	this.id = _.uniqueId("unipuck_layout_");
 	
-	if (args != null) {
-		if (args.height != null) {
-			this.height = args.height;
-			this.width = args.height;
-		}
-		if (args.width != null) {
+	
+	this.height = 200;
+	this.width = this.height;
+	
+	/**
+	* Font size of the label
+	* 
+	* @property fontSize
+	* @type {String}
+	* @default "7"
+	*/
+	this.fontSize = 7;
+	/**
+	* Font color of the label
+	* 
+	* @property fontColor
+	* @type {String}
+	* @default "FFFFFF"
+	*/
+	this.fontColor = '#FFFFFF';
+
+	/**
+	* Default Color when a well is empty
+	* 
+	* @property fontColor
+	* @type {String}
+	* @default "2E2E2E"
+	*/
+	this.fill = '#2E2E2E';
+	
+	/**
+	* Default Color when a well is filled
+	* 
+	* @property fontColor
+	* @type {String}
+	* @default "2E2E2E"
+	*/
+	this.filledColor = '#D8D8D8';
+
+	if (args !== null) {
+		if (args.width !== null) {
+			this.height = args.size;
 			this.width = args.width;
-			this.height = args.width;
 		}
-		if (args.tbar != null) {
-			this.tbar = args.tbar;
+		if (args.height !== null) {
+			this.height = args.height;
 		}
-		
+		if (args.fontSize !== null) {
+			this.fontSize = args.fontSize;
+		}
+		if (args.fontColor !== null) {
+			this.fontColor = args.fontColor;
+		}
+		if (args.fill !== null) {
+			this.fill = args.fill;
+		}
 	}
+	
+	/**
+	* This event is triggered when a click event occurs on a well
+	* 
+	* @property onClick
+	* @type {Event}
+	*/
+	this.onClick = new Event(this);
 }
 
-PuckLayout.prototype.renderAsSpine = function(puck) {
-	/** Rendering layout **/
-	document.getElementById(this.id).innerHTML = "";
-	document.getElementById(this.id).setAttribute("width", this.width);
-	document.getElementById(this.id).setAttribute("height", this.height);
-	
-	var canvas = SVG.createSVGCanvas(document.getElementById(this.id), [["width", this.width], ["height", this.height]])
-	var steps = 10;
-	var centerX = this.width/2;
-	var centerY = this.width/2;
-	var radius = (this.width/2) - this.width/8;
-	
-	
-	this.renderContainer(canvas, centerX, centerY, centerX - 4);
-	
-	var xValues = [];
-	var yValues = [];
-	
-	for (var i = 0; i < steps; i++) {
-	    xValues[i] = (centerX + radius * Math.cos(2 * Math.PI * i / steps));
-	    yValues[i] = (centerY + radius * Math.sin(2 * Math.PI * i / steps));
-	    this.renderEmptyWell(canvas, xValues[i], yValues[i], (i+1));
-		
-	}
-	
-	for (var j = 0; j < puck.sampleVOs.length; j++) {
-		var index = Number(puck.sampleVOs[j].location)-1;
-		
-		this.renderWell(canvas, xValues[index], yValues[index], (puck.sampleVOs[j].location));
+
+
+/**
+* Load sample into the container
+*
+* @method load
+* @param {String} samples [{'name':'test', position:'1', id:'id'}]
+*/
+PuckLayout.prototype.load = function(samples) {
+	this.samples = samples;
+	if (this.targetId !== null){
+		this.render(this.targetId);
 	}
 };
 
-
-PuckLayout.prototype.renderEmptyPlateWell = function(canvas, x, y, label) {
-	var s = Snap(canvas);
-	
-	var width = (this.width-40)/12;
-	var emptyWell = s.rect(x,y, width, width);
-	emptyWell.attr({
-	    fill: "#FFFFFF",
-	    stroke: "#000",
-	    strokeWidth: 1
-	});
-	
+/**
+* It returns a svg node by id
+*
+* @method getSvgGroupById
+* @param {String} id Identifier of the SVG node
+*/
+PuckLayout.prototype.getSvgGroupById = function(id) {
+	var svgNode = Snap.select('#' + this.id);
+	return svgNode.select("#" + id);
 };
 
-
-PuckLayout.prototype.renderEmptyWell = function(canvas, x, y, label) {
-	var s = Snap(canvas);
-	var radius = this.width/12;
-	var emptyWell = s.circle(x, y, radius);
-	emptyWell.attr({
-	    fill: "#FFFFFF",
-	    stroke: "#000",
-	    strokeWidth: 1
-	});
-	
-	s.text(x - (radius/2), y + (radius/2), label);
-	
-};
-
-PuckLayout.prototype.renderPlateContainer = function(canvas, width, height) {
+/**
+* It renders a plate, attach the events to the wells afterwards and display the samples
+*
+* @method render
+* @param {String} targetId node id
+*/
+PuckLayout.prototype.render = function(targetId) {
 	var _this = this;
-	var s = Snap(canvas);
-	var bigCircle = s.rect(0,0, width, height);
-	bigCircle.attr({
-	    fill: "#585858",
-	    stroke: "#000",
-	    strokeWidth: 1
-	});
+	this.targetId = targetId;
+	document.getElementById(targetId).innerHTML = "";
+	document.getElementById(targetId).setAttribute("width", this.width);
+	document.getElementById(targetId).setAttribute("height", this.height);
 	
-	function selectSVG(){
-		//bigCircle.animate({cy: 300}, 5000,mina.bounce);
-		//bigCircle.animate({fill:"red"},200);
-		bigCircle.attr({
-		    fill: "#D8D8D8",
-		    stroke: "#000",
-		    strokeWidth: 1
-		});
-	};
-	
-	function deselectSVG(){
-		bigCircle.attr({
-		    fill: "#585858",
-		    stroke: "#000",
-		    strokeWidth: 1,
-		    cursor: 'pointer'
-		});
-	};
-	
-	function clickSVG(){
-		location.hash = '#/mx/puck/' + _this.puck.containerId + '/main'; 
-	};
-	
-	bigCircle.mouseover( selectSVG );
-	bigCircle.mouseout( deselectSVG );
-	bigCircle.click( clickSVG );
-	
-};
+	/** Filling template and rendering on the target container **/
+	var configuration = this.getConfiguration();
+	dust.render(this.template, configuration, function(err, out){
+        	document.getElementById(targetId).innerHTML = (out);
+     	});
 
-
-PuckLayout.prototype.renderContainer = function(canvas, centerX, centerY, radius) {
-	var _this = this;
-	var s = Snap(canvas);
-	var bigCircle = s.circle(centerX, centerY, centerX - 4);
-	bigCircle.attr({
-	    fill: "#585858",
-	    stroke: "#000",
-	    strokeWidth: 1
-	});
-	
-	function selectSVG(){
-		//bigCircle.animate({cy: 300}, 5000,mina.bounce);
-		//bigCircle.animate({fill:"red"},200);
-		bigCircle.attr({
-		    fill: "#D8D8D8",
-		    stroke: "#000",
-		    strokeWidth: 1
-		});
-	};
-	
-	function deselectSVG(){
-		bigCircle.attr({
-		    fill: "#585858",
-		    stroke: "#000",
-		    strokeWidth: 1,
-		    cursor: 'pointer'
-		});
-	};
-	
-	function clickSVG(){
-		location.hash = '#/mx/puck/' + _this.puck.containerId + '/main'; 
-	};
-	
-	bigCircle.mouseover( selectSVG );
-	bigCircle.mouseout( deselectSVG );
-	bigCircle.click( clickSVG );
-	
-};
-
-
-
-PuckLayout.prototype.renderPlateWell = function(canvas, x, y, label) {
-	var s = Snap(canvas);
-	var width = (this.width-40)/12;
-	var emptyWell = s.rect(x,y, width, width);
-	emptyWell.attr({
-	    fill: "#FA5882",
-	    stroke: "#000",
-	    strokeWidth: 1
-	});
-};
-
-
-
-PuckLayout.prototype.renderWell = function(canvas, x, y, label) {
-	var s = Snap(canvas);
-	var radius = this.width/12;
-	var well = s.circle(x, y, radius);
-	well.attr({
-	    fill: "#FA5882",
-	    stroke: "#000",
-	    strokeWidth: 1
-	});
-	s.text(x - (radius/2), y + (radius/2), label);
-};
-
-
-PuckLayout.prototype.renderAsPlate = function(puck) {
-	/** Rendering layout **/
-	document.getElementById(this.id).innerHTML = "";
-	document.getElementById(this.id).setAttribute("width", this.width);
-	document.getElementById(this.id).setAttribute("height", this.height);
-
-	var canvas = SVG.createSVGCanvas(document.getElementById(this.id), [["width", this.width], ["height", this.height]]);
-	var s = Snap(canvas);
-	
-	
-	this.renderPlateContainer(canvas, this.width, this.height);
-	
-	
-	/** Getting coordinates X and Y **/
-	var xValues = [];
-	
-	var height = this.height/12 ;
-	var width = this.width/8 ;
-	/** External circle with 10 positions **/
-	for (var j = 0; j < 8;j++) {
-	    for (var i = 0;i < 12; i++) {
-	    	xValues.push( [2 + i*height, 2 +j*width ]);
-	    }
-	}
-	
-	for (var i = 0; i < xValues.length; i++) {
-		this.renderEmptyPlateWell(canvas, xValues[i][0], xValues[i][1], (i+1));
-	}
-	
-	
-	for (var j = 0; j < puck.sampleVOs.length; j++) {
-		var index = Number(puck.sampleVOs[j].location)-1;
-		this.renderPlateWell(canvas, xValues[index][0], xValues[index][1], (puck.sampleVOs[j].location));
-	}
-	
-};
-
-PuckLayout.prototype.renderAsUnipuck = function(puck) {
-	/** Rendering layout **/
-	document.getElementById(this.id).innerHTML = "";
-	document.getElementById(this.id).setAttribute("width", this.width);
-	document.getElementById(this.id).setAttribute("height", this.height);
-
-	var canvas = SVG.createSVGCanvas(document.getElementById(this.id), [["width", this.width], ["height", this.height]]);
-	var s = Snap(canvas);
-	
-	var centerX = (this.width/2) - 2;
-	var centerY = (this.width/2) - 2;
-	var radius = ((this.width/2) - this.width/8) - 5;
-	
-	
-	this.renderContainer(canvas, centerX, centerY, centerX - 4);
-	
-	
-	/** Getting coordinates X and Y **/
-	var xValues = [];
-	var yValues = [];
-	
-	/** External circle with 10 positions **/
-	for (var i = 0; i < 11; i++) {
-		steps = 10;
-	    xValues[i] = (centerX + radius * Math.cos(2 * Math.PI * i / steps));
-	    yValues[i] = (centerY + radius * Math.sin(2 * Math.PI * i / steps));
+	/** Attach events **/
+	var svgNode = Snap.select('#' + this.id);
+	if(svgNode !== null){
+		var click = function(sender){
+			var well = _.find(configuration.wells, {id : sender.currentTarget.id});
+			_this.onClick.notify({
+									well 	: well,
+									sample  : _.find(_this.samples, {position:well.position})
+			});
+		};
 		
-	}
-	
-	/** Internal circle with 6 positions **/
-	for (var i = 10; i < 16; i++) {
-		steps = 6;
-		radius =  (this.width/2) - this.width/3;
-	    xValues[i] = (centerX + radius * Math.cos(2 * Math.PI * i / steps));
-	    yValues[i] = (centerY + radius * Math.sin(2 * Math.PI * i / steps));
-	}
-
-	/** Drawing wells **/
-	for (var i = 0; i < 16; i++) {
-		this.renderEmptyWell(canvas, xValues[i], yValues[i], (i+1));
-	}
-	
-	for (var j = 0; j < puck.sampleVOs.length; j++) {
-		var index = Number(puck.sampleVOs[j].location)-1;
-		this.renderWell(canvas, xValues[index], yValues[index], (puck.sampleVOs[j].location));
-	}
-	
-};
-
-PuckLayout.prototype.load = function(puck) {
-	this.puck = puck;
-	try{
-		/** It may happen that the DIV container has not been rendered yet **/
-		this.render(puck);
-	}
-	catch(e){
-		console.log(e);
-	}
-	
-};
-PuckLayout.prototype.render = function(puck) {
-	if (this.puck != null){
-		/** Unipuck **/
-		if (this.puck.capacity == 16){
-			this.renderAsUnipuck(this.puck);
-		}
+		var mouseover = function(sender){
+			_this.getSvgGroupById(sender.currentTarget.id).select(_this.wellType).attr({
+			    stroke: "#FFFFFF",
+			    style: "cursor:pointer"
+			});
+		};
 		
-		/** Spine **/
-		if (this.puck.capacity == 10){
-			this.renderAsSpine(this.puck);
-		}
+		var mouseout = function(sender){
+			_this.getSvgGroupById(sender.currentTarget.id).select(_this.wellType).attr({
+			    stroke: "#000000"
+			});
+		};
 		
-		/** Spine **/
-		if (this.puck.capacity == 96){
-			this.renderAsPlate(this.puck);
+		
+		for (var i =0; i < configuration.wells.length; i++){
+			var svgGroup = this.getSvgGroupById(configuration.wells[i].id);
+			svgGroup.click(click);
+			svgGroup.mouseover(mouseover);
+			svgGroup.mouseout(mouseout);
 		}
 	}
-};
-
-PuckLayout.prototype.getPanel = function() {
-	var _this = this;
-	this.panel = Ext.create('Ext.panel.Panel', {
-		margin : 10,
-		items : [ 
-		         {
-						html : '<div style="width:' + (this.width + 2) +'px;height:' + (this.height +2) +'px;" id=' + this.id +'></div>'
-				 }
-		],		
-		listeners : {
-			afterrender : function(component, eOpts) {
-				_this.render();
-			}
-	    }
-	});
 	
-	return this.panel;
+	/** Render samples **/
+	if (this.samples != null){
+		for (var x = 0; x < this.samples.length; x++) {
+			var well = _.find(configuration.wells, {position:this.samples[x].position});
+			_this.getSvgGroupById(well.id).select(_this.wellType).attr({
+			    fill: this.filledColor
+			});
+		}
+	}
+	
 };
-
-
-
-

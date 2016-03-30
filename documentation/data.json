@@ -6,364 +6,228 @@
         "url": "https://github.com/ispyb/EXI"
     },
     "files": {
-        "js/plates/containers/spinelayout.js": {
-            "name": "js/plates/containers/spinelayout.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "js/plates/containers/unipucklayout.js": {
-            "name": "js/plates/containers/unipucklayout.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
         "js/plates/pucklayout.js": {
             "name": "js/plates/pucklayout.js",
             "modules": {},
+            "classes": {
+                "PuckLayout": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/plates/sampleplatelayout.js": {
+            "name": "js/plates/sampleplatelayout.js",
+            "modules": {},
             "classes": {},
             "fors": {},
             "namespaces": {}
         },
-        "js/plates/spine.js": {
-            "name": "js/plates/spine.js",
+        "js/plates/spinelayout.js": {
+            "name": "js/plates/spinelayout.js",
             "modules": {},
             "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/plates/unipucklayout.js": {
+            "name": "js/plates/unipucklayout.js",
+            "modules": {},
+            "classes": {
+                "UnipuckLayout": 1
+            },
             "fors": {},
             "namespaces": {}
         }
     },
     "modules": {},
-    "classes": {},
+    "classes": {
+        "PuckLayout": {
+            "name": "PuckLayout",
+            "shortname": "PuckLayout",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "js/plates/pucklayout.js",
+            "line": 1,
+            "description": "Super class for sample layouts: unipuck, spines,etc..",
+            "is_constructor": 1
+        },
+        "UnipuckLayout": {
+            "name": "UnipuckLayout",
+            "shortname": "UnipuckLayout",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "js/plates/unipucklayout.js",
+            "line": 1,
+            "description": "Unipuck is a container with 16 wells",
+            "is_constructor": 1
+        }
+    },
     "elements": {},
     "classitems": [
         {
-            "file": "js/plates/containers/spinelayout.js",
-            "line": 19,
-            "class": ""
-        },
-        {
-            "file": "js/plates/containers/spinelayout.js",
-            "line": 54,
-            "class": ""
-        },
-        {
-            "file": "js/plates/containers/unipucklayout.js",
-            "line": 61,
-            "class": ""
-        },
-        {
-            "file": "js/plates/containers/unipucklayout.js",
-            "line": 77,
-            "class": ""
-        },
-        {
-            "file": "js/plates/containers/unipucklayout.js",
-            "line": 81,
-            "class": ""
-        },
-        {
-            "file": "js/plates/containers/unipucklayout.js",
-            "line": 89,
-            "class": ""
-        },
-        {
-            "file": "js/plates/containers/unipucklayout.js",
-            "line": 99,
-            "class": ""
-        },
-        {
-            "file": "js/plates/containers/unipucklayout.js",
-            "line": 102,
-            "class": ""
-        },
-        {
-            "file": "js/plates/containers/unipucklayout.js",
-            "line": 164,
-            "class": ""
+            "file": "js/plates/pucklayout.js",
+            "line": 14,
+            "description": "Font size of the label",
+            "itemtype": "property",
+            "name": "fontSize",
+            "type": "{String}",
+            "default": "\"7\"",
+            "class": "PuckLayout"
         },
         {
             "file": "js/plates/pucklayout.js",
-            "line": 24,
-            "class": ""
+            "line": 22,
+            "description": "Font color of the label",
+            "itemtype": "property",
+            "name": "fontColor",
+            "type": "{String}",
+            "default": "\"FFFFFF\"",
+            "class": "PuckLayout"
         },
         {
             "file": "js/plates/pucklayout.js",
-            "line": 192,
-            "class": ""
+            "line": 31,
+            "description": "Default Color when a well is empty",
+            "itemtype": "property",
+            "name": "fontColor",
+            "type": "{String}",
+            "default": "\"2E2E2E\"",
+            "class": "PuckLayout"
         },
         {
             "file": "js/plates/pucklayout.js",
-            "line": 204,
-            "class": ""
+            "line": 40,
+            "description": "Default Color when a well is filled",
+            "itemtype": "property",
+            "name": "fontColor",
+            "type": "{String}",
+            "default": "\"2E2E2E\"",
+            "class": "PuckLayout"
         },
         {
             "file": "js/plates/pucklayout.js",
-            "line": 209,
-            "class": ""
+            "line": 68,
+            "description": "This event is triggered when a click event occurs on a well",
+            "itemtype": "property",
+            "name": "onClick",
+            "type": "{Event}",
+            "class": "PuckLayout"
         },
         {
             "file": "js/plates/pucklayout.js",
-            "line": 229,
-            "class": ""
+            "line": 79,
+            "description": "Load sample into the container",
+            "itemtype": "method",
+            "name": "load",
+            "params": [
+                {
+                    "name": "samples",
+                    "description": "[{'name':'test', position:'1', id:'id'}]",
+                    "type": "String"
+                }
+            ],
+            "class": "PuckLayout"
         },
         {
             "file": "js/plates/pucklayout.js",
-            "line": 245,
-            "class": ""
+            "line": 92,
+            "description": "It returns a svg node by id",
+            "itemtype": "method",
+            "name": "getSvgGroupById",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "Identifier of the SVG node",
+                    "type": "String"
+                }
+            ],
+            "class": "PuckLayout"
         },
         {
             "file": "js/plates/pucklayout.js",
-            "line": 249,
-            "class": ""
+            "line": 103,
+            "description": "It renders a plate, attach the events to the wells afterwards and display the samples",
+            "itemtype": "method",
+            "name": "render",
+            "params": [
+                {
+                    "name": "targetId",
+                    "description": "node id",
+                    "type": "String"
+                }
+            ],
+            "class": "PuckLayout"
         },
         {
             "file": "js/plates/pucklayout.js",
-            "line": 257,
-            "class": ""
+            "line": 116,
+            "class": "PuckLayout"
         },
         {
             "file": "js/plates/pucklayout.js",
-            "line": 265,
-            "class": ""
+            "line": 122,
+            "class": "PuckLayout"
         },
         {
             "file": "js/plates/pucklayout.js",
-            "line": 280,
-            "class": ""
+            "line": 155,
+            "class": "PuckLayout"
         },
         {
-            "file": "js/plates/pucklayout.js",
-            "line": 290,
-            "class": ""
+            "file": "js/plates/sampleplatelayout.js",
+            "line": 17,
+            "description": "Gets the configuration of the layout",
+            "itemtype": "method",
+            "name": "getConfiguration",
+            "return": {
+                "description": "Returns {\n\t\t\twidth \t: this.width,<br />\n\t\t\theight\t: this.height,<br />\n\t\t\tr \t\t: this.width/2,<br />\n\t\t\tcx \t\t: this.width/2,<br />\n\t\t\tcy \t\t: this.height/2,<br />\n\t\t\tid\t\t: this.id,<br />\n\t\t\twells \t: [<br />{<br />\n\t\t\t\t\tcx\t\t\t: cx,\n\t\t\t\t\tcy \t\t\t: cy,\n\t\t\t\t\tlabel   \t: labels[xLabel],<br />\n\t\t\t\t\tr  \t\t\t: this.width/11,<br />\n\t\t\t\t\tfill\t\t: this.fill,<br />\n\t\t\t\t\tfontColor \t: this.fontColor,<br />\n\t\t\t\t\tfontSize\t: this.fontSize,<br />\n\t\t\t\t\tid\t\t\t: this.id + \"_\" + labels[xLabel]<br />\n\t\t\t}]\n\t}",
+                "type": "JSON"
+            },
+            "class": "UnipuckLayout"
         },
         {
-            "file": "js/plates/pucklayout.js",
-            "line": 295,
-            "class": ""
+            "file": "js/plates/spinelayout.js",
+            "line": 17,
+            "description": "Gets the configuration of the layout",
+            "itemtype": "method",
+            "name": "getConfiguration",
+            "return": {
+                "description": "Returns {\n\t\t\twidth \t: this.width,<br />\n\t\t\theight\t: this.height,<br />\n\t\t\tr \t\t: this.width/2,<br />\n\t\t\tcx \t\t: this.width/2,<br />\n\t\t\tcy \t\t: this.height/2,<br />\n\t\t\tid\t\t: this.id,<br />\n\t\t\twells \t: [<br />{<br />\n\t\t\t\t\tcx\t\t\t: cx,\n\t\t\t\t\tcy \t\t\t: cy,\n\t\t\t\t\tlabel   \t: labels[xLabel],<br />\n\t\t\t\t\tr  \t\t\t: this.width/11,<br />\n\t\t\t\t\tfill\t\t: this.fill,<br />\n\t\t\t\t\tfontColor \t: this.fontColor,<br />\n\t\t\t\t\tfontSize\t: this.fontSize,<br />\n\t\t\t\t\tid\t\t\t: this.id + \"_\" + labels[xLabel]<br />\n\t\t\t}]\n\t}",
+                "type": "JSON"
+            },
+            "class": "UnipuckLayout"
         },
         {
-            "file": "js/plates/pucklayout.js",
-            "line": 300,
-            "class": ""
-        },
-        {
-            "file": "js/plates/spine.js",
-            "line": 24,
-            "class": ""
-        },
-        {
-            "file": "js/plates/spine.js",
-            "line": 123,
-            "class": ""
-        },
-        {
-            "file": "js/plates/spine.js",
-            "line": 192,
-            "class": ""
-        },
-        {
-            "file": "js/plates/spine.js",
-            "line": 204,
-            "class": ""
-        },
-        {
-            "file": "js/plates/spine.js",
-            "line": 209,
-            "class": ""
-        },
-        {
-            "file": "js/plates/spine.js",
-            "line": 229,
-            "class": ""
-        },
-        {
-            "file": "js/plates/spine.js",
-            "line": 245,
-            "class": ""
-        },
-        {
-            "file": "js/plates/spine.js",
-            "line": 249,
-            "class": ""
-        },
-        {
-            "file": "js/plates/spine.js",
-            "line": 257,
-            "class": ""
-        },
-        {
-            "file": "js/plates/spine.js",
-            "line": 265,
-            "class": ""
-        },
-        {
-            "file": "js/plates/spine.js",
-            "line": 280,
-            "class": ""
-        },
-        {
-            "file": "js/plates/spine.js",
-            "line": 290,
-            "class": ""
-        },
-        {
-            "file": "js/plates/spine.js",
-            "line": 296,
-            "class": ""
-        },
-        {
-            "file": "js/plates/spine.js",
-            "line": 301,
-            "class": ""
+            "file": "js/plates/unipucklayout.js",
+            "line": 17,
+            "description": "Gets the configuration of the layout",
+            "itemtype": "method",
+            "name": "getConfiguration",
+            "return": {
+                "description": "Returns {\n\t\t\twidth \t: this.width,<br />\n\t\t\theight\t: this.height,<br />\n\t\t\tr \t\t: this.width/2,<br />\n\t\t\tcx \t\t: this.width/2,<br />\n\t\t\tcy \t\t: this.height/2,<br />\n\t\t\tid\t\t: this.id,<br />\n\t\t\twells \t: [<br />{<br />\n\t\t\t\t\tcx\t\t\t: cx,\n\t\t\t\t\tcy \t\t\t: cy,\n\t\t\t\t\tlabel   \t: labels[xLabel],<br />\n\t\t\t\t\tr  \t\t\t: this.width/11,<br />\n\t\t\t\t\tfill\t\t: this.fill,<br />\n\t\t\t\t\tfontColor \t: this.fontColor,<br />\n\t\t\t\t\tfontSize\t: this.fontSize,<br />\n\t\t\t\t\tid\t\t\t: this.id + \"_\" + labels[xLabel]<br />\n\t\t\t}]\n\t}",
+                "type": "JSON"
+            },
+            "class": "UnipuckLayout"
         }
     ],
     "warnings": [
         {
             "message": "Missing item type",
-            "line": " js/plates/containers/spinelayout.js:19"
+            "line": " js/plates/pucklayout.js:116"
         },
         {
             "message": "Missing item type",
-            "line": " js/plates/containers/spinelayout.js:54"
+            "line": " js/plates/pucklayout.js:122"
         },
         {
             "message": "Missing item type",
-            "line": " js/plates/containers/unipucklayout.js:61"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/containers/unipucklayout.js:77"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/containers/unipucklayout.js:81"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/containers/unipucklayout.js:89"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/containers/unipucklayout.js:99"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/containers/unipucklayout.js:102"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/containers/unipucklayout.js:164"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/pucklayout.js:24"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/pucklayout.js:192"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/pucklayout.js:204"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/pucklayout.js:209"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/pucklayout.js:229"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/pucklayout.js:245"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/pucklayout.js:249"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/pucklayout.js:257"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/pucklayout.js:265"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/pucklayout.js:280"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/pucklayout.js:290"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/pucklayout.js:295"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/pucklayout.js:300"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/spine.js:24"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/spine.js:123"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/spine.js:192"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/spine.js:204"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/spine.js:209"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/spine.js:229"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/spine.js:245"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/spine.js:249"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/spine.js:257"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/spine.js:265"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/spine.js:280"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/spine.js:290"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/spine.js:296"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/plates/spine.js:301"
+            "line": " js/plates/pucklayout.js:155"
         }
     ]
 }

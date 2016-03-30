@@ -22,29 +22,22 @@ module.exports = function(grunt) {
 	  concat : {
 		  prod:{
 			  files : {
-				 'min/exi-ui-viz.js'		: ["bower/bower.js", 'bower_components/lodash/lodash.js', "js/**/*.js"],
+				 'min/exi-ui-viz.js'		: [
+				                    		   'bower_components/exi-ui-utils/min/exi-ui-utils.min.js',
+				                    		   'js/**/*.js'
+				                    		   ],
 			  }
 		  }
 	  },
 	  uglify : {
 		  prod:{
-				
 			  options: {
-			      beautify : true,
-			      stripBanners: true,
-                              drop_debugger : false,
-			      compress: {
-					drop_debugger : false,
-					global_defs: {
-					  "DEBUG": true
-					},
-					dead_code: true
-			      },
+			      beautify : false
 			  },
 			  files : {
 				  'min/exi-ui-viz.min.js' 		: [
-				                   		   	   	'min/precompiled.templates.min.js',
-										'min/exi-ui-viz.js'
+				                   		   	   			'min/precompiled.templates.min.js',
+				                   		   	   			'min/exi-ui-viz.js'
 									  ]
 			  }
 		  }

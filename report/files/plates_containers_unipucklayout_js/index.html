@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">55.66</p>
+      <p class="stat">56.97</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">97</p>
+      <p class="stat">238</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">39.87</p>
+      <p class="stat">48.36</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">1.19</p>
+      <p class="stat">2.02</p>
     </div>
   </div>
 </div>
@@ -89,14 +89,53 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="col-md-12">function UnipuckLayout(args) {
+    <textarea id="file-source" class="col-md-12">/**
+* Unipuck is a container with 16 wells
+*
+* @class UnipuckLayout
+* @constructor
+*/
+function UnipuckLayout(args) {
 	this.id = _.uniqueId(&quot;unipuck_layout_&quot;);
+	
+	
 	this.height = 200;
 	this.width = this.height;
+	
+	/**
+	* Font size of the label
+	* 
+	* @property fontSize
+	* @type {String}
+	* @default &quot;7&quot;
+	*/
 	this.fontSize = 7;
-	this.fontColor = &#039;gray&#039;;
+	/**
+	* Font color of the label
+	* 
+	* @property fontColor
+	* @type {String}
+	* @default &quot;FFFFFF&quot;
+	*/
+	this.fontColor = &#039;#FFFFFF&#039;;
 
-	this.fill = &#039;gray&#039;;
+	/**
+	* Default Color when a well is empty
+	* 
+	* @property fontColor
+	* @type {String}
+	* @default &quot;2E2E2E&quot;
+	*/
+	this.fill = &#039;#2E2E2E&#039;;
+	
+	/**
+	* Default Color when a well is filled
+	* 
+	* @property fontColor
+	* @type {String}
+	* @default &quot;2E2E2E&quot;
+	*/
+	this.filledColor = &#039;#D8D8D8&#039;;
 
 	if (args != null) {
 		if (args.size != null) {
@@ -113,8 +152,40 @@
 			this.fill = args.fill;
 		}
 	}
+	
+	/**
+	* This event is triggered when a click event occurs on a well
+	* 
+	* @property onClick
+	* @type {Event}
+	*/
+	this.onClick = new Event(this);
 }
 
+/**
+* My method description.  Like other pieces of your comment blocks, 
+* this can span multiple lines.
+*
+* @method getConfiguration
+* @return {JSON} Returns {
+			width 	: this.width,&lt;br /&gt;
+			height	: this.height,&lt;br /&gt;
+			r 		: this.width/2,&lt;br /&gt;
+			cx 		: this.width/2,&lt;br /&gt;
+			cy 		: this.height/2,&lt;br /&gt;
+			id		: this.id,&lt;br /&gt;
+			wells 	: [&lt;br /&gt;{&lt;br /&gt;
+					cx			: cx,
+					cy 			: cy,
+					label   	: labels[xLabel],&lt;br /&gt;
+					r  			: this.width/11,&lt;br /&gt;
+					fill		: this.fill,&lt;br /&gt;
+					fontColor 	: this.fontColor,&lt;br /&gt;
+					fontSize	: this.fontSize,&lt;br /&gt;
+					id			: this.id + &quot;_&quot; + labels[xLabel]&lt;br /&gt;
+			}]
+	}
+*/
 UnipuckLayout.prototype.getConfiguration = function() {
 	var coordinates = [];
 	var centerX = (this.width/2) - 2;
@@ -124,15 +195,21 @@ UnipuckLayout.prototype.getConfiguration = function() {
 	var labels = [14,13,12,11,10,9,8,7,6,16, 15];
 	for(var i = 0; i &lt; 55; i ++) {
 		if (i%5 == 1){
+			var cx = centerX + radius * Math.cos(2 * Math.PI * i / 55);
+			var cy = centerY + radius * Math.sin(2 * Math.PI * i / 55);
+			var r = this.width/11;
 			coordinates.push({
-					cx		: centerX + radius * Math.cos(2 * Math.PI * i / 55),
-					cy 		: centerY + radius * Math.sin(2 * Math.PI * i / 55),
+					cx			: cx,
+					cy 			: cy,
+					labelcx		: cx - (r/2.5),
+					labelcy		: cy + (r/2.5),
 					label   	: labels[xLabel],
-					r  		: this.width/11,
+					position   	: labels[xLabel],
+					r  			: this.width/11,
 					fill		: this.fill,
 					fontColor 	: this.fontColor,
 					fontSize	: this.fontSize,
-					id		: this.id + &quot;_&quot; + labels[xLabel]
+					id			: this.id + &quot;_&quot; + labels[xLabel]
 			});  
 			xLabel = xLabel + 1;
 		}
@@ -144,15 +221,21 @@ UnipuckLayout.prototype.getConfiguration = function() {
 	labels = [4,3,2,1,5];	
 	for(var i = 0; i &lt; 20; i ++) {
 		if (i%4 == 3){
+			var cx = centerX + radius * Math.cos(2 * Math.PI * i / 20);
+			var cy = centerY + radius * Math.sin(2 * Math.PI * i / 20);
+			var r = this.width/11;
 			coordinates.push({
-					cx		: centerX + radius * Math.cos(2 * Math.PI * i / 20),
-					cy 		: centerY + radius * Math.sin(2 * Math.PI * i / 20),
+					cx			: cx,
+					cy 			: cy,
+					labelcx		: cx - (r/2.5),
+					labelcy		: cy + (r/2.5),
 					label   	: labels[xLabel],
-					r  		: this.width/11,
+					position   	: labels[xLabel],
+					r  			: r,
 					fill		: this.fill,
 					fontColor 	: this.fontColor,
 					fontSize	: this.fontSize,
-					id		: this.id + &quot;_&quot; + labels[xLabel]
+					id			: this.id + &quot;_&quot; + labels[xLabel]
 			});  
 			xLabel = xLabel + 1;
 		}
@@ -161,14 +244,47 @@ UnipuckLayout.prototype.getConfiguration = function() {
 	return {
 			width 	: this.width,
 			height	: this.height,
-			r 	: this.width/2,
-			cx 	: this.width/2,
-			cy 	: this.height/2,
-			wells : coordinates
+			r 		: this.width/2,
+			cx 		: this.width/2,
+			cy 		: this.height/2,
+			id		: this.id,
+			wells 	: coordinates
 	}
 };
 
+/**
+* Load sample into the container
+*
+* @method load
+* @param {String} samples [{&#039;name&#039;:&#039;test&#039;, position:&#039;1&#039;, id:&#039;id&#039;}]
+*/
+UnipuckLayout.prototype.load = function(samples) {
+	this.samples = samples;
+	if (this.targetId != null){
+		this.render(this.targetId);
+	}
+};
+
+/**
+* It returns a svg node by id
+*
+* @method getSvgGroupById
+* @param {String} id Identifier of the SVG node
+*/
+UnipuckLayout.prototype.getSvgGroupById = function(id) {
+	var svgNode = Snap.select(&#039;#&#039; + this.id);
+	return svgNode.select(&quot;#&quot; + id);
+};
+
+/**
+* It renders a plate, attach the events to the wells afterwards and display the samples
+*
+* @method render
+* @param {String} targetId node id
+*/
 UnipuckLayout.prototype.render = function(targetId) {
+	var _this = this;
+	this.targetId = targetId;
 	document.getElementById(targetId).innerHTML = &quot;&quot;;
 	document.getElementById(targetId).setAttribute(&quot;width&quot;, this.width);
 	document.getElementById(targetId).setAttribute(&quot;height&quot;, this.height);
@@ -180,11 +296,42 @@ UnipuckLayout.prototype.render = function(targetId) {
      	});
 
 	/** Attach events **/
-	for (var i =0; i &lt; configuration.wells.length; i++){
-		document.getElementById(configuration.wells[i].id).onclick = function(event, obj){console.log(event);}
+	var svgNode = Snap.select(&#039;#&#039; + this.id);
+	if(svgNode != null){
+		for (var i =0; i &lt; configuration.wells.length; i++){
+			var svgGroup = this.getSvgGroupById(configuration.wells[i].id);
+			svgGroup.click(function(sender){
+				var well = _.find(configuration.wells, {id : sender.currentTarget.id});
+				_this.onClick.notify({
+										well 	: well,
+										sample  : _.find(_this.samples, {position:well.position})
+				});
+			});
+			
+			svgGroup.mouseover(function(sender){
+				_this.getSvgGroupById(sender.currentTarget.id).select(&quot;circle&quot;).attr({
+				    stroke: &quot;#FFFFFF&quot;,
+				    style: &quot;cursor:pointer&quot;
+				});
+			});
+			svgGroup.mouseout(function(sender){
+				_this.getSvgGroupById(sender.currentTarget.id).select(&quot;circle&quot;).attr({
+				    stroke: &quot;#000000&quot;
+				});
+			});
+		}
 	}
-
-	return;
+	
+	/** Render samples **/
+	if (this.samples != null){
+		for (var i = 0; i &lt; this.samples.length; i++) {
+			var well = _.find(configuration.wells, {position:this.samples[i].position});
+			_this.getSvgGroupById(well.id).select(&quot;circle&quot;).attr({
+			    fill: this.filledColor
+			});
+		}
+	}
+	
 };</textarea>
   </div>
 </div>
