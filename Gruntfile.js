@@ -23,7 +23,7 @@ module.exports = function(grunt) {
 		  prod:{
 			  files : {
 				 'min/exi-ui-viz.js'		: [
-				                    		   'bower_components/exi-ui-utils/min/exi-ui-utils.min.js',
+				                    		   //'bower_components/exi-ui-utils/min/exi-ui-utils.min.js',
 				                    		   'js/**/*.js'
 				                    		   ],
 			  }
@@ -37,7 +37,7 @@ module.exports = function(grunt) {
 			  files : {
 				  'min/exi-ui-viz.min.js' 		: [
 				                   		   	   			'min/precompiled.templates.min.js',
-				                   		   	   			'min/exi-ui-viz.js'
+				                   		   	   			'min/exi-ui-viz.min.js'
 									  ]
 			  }
 		  }
