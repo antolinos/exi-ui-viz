@@ -24,7 +24,7 @@ module.exports = function(grunt) {
 			  files : {
 				 'min/exi-ui-viz.js'		: [
 				                    		   //'bower_components/exi-ui-utils/min/exi-ui-utils.min.js',
-				                    		   'js/**/*.js'
+				                    		   'js/**/*.js',  'js/*.js'
 				                    		   ],
 			  }
 		  }
@@ -37,7 +37,7 @@ module.exports = function(grunt) {
 			  files : {
 				  'min/exi-ui-viz.min.js' 		: [
 				                   		   	   			'min/precompiled.templates.min.js',
-				                   		   	   			'min/exi-ui-viz.min.js'
+				                   		   	   			'min/exi-ui-viz.js'
 									  ]
 			  }
 		  }
@@ -78,12 +78,6 @@ module.exports = function(grunt) {
 		      }]
 		}
 	},
-	bower_concat: {
-	  all: {
-	    dest: 'bower/bower.js',
-		
-	  }
-	},
 	dustjs: {
 	    compile: {
 	      files: {
@@ -108,7 +102,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-bower-concat');
 
   grunt.task.registerTask('doc', ['yuidoc:compile']);
-  grunt.task.registerTask('default', ['bower_concat', 'dustjs', 'jshint:prod' , 'plato:prod', 'concat:prod', 'uglify:prod', 'cssmin:prod', 'yuidoc:compile']);
+  grunt.task.registerTask('default', ['dustjs', 'jshint:prod' , 'plato:prod', 'concat:prod', 'uglify:prod', 'cssmin:prod', 'yuidoc:compile']);
   grunt.task.registerTask('dev', ['bower_concat', 'dustjs','includeSource:dev', 'cssmin:prod', 'plato:prod']);
   
 };
